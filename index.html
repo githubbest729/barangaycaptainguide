@@ -37,8 +37,7 @@
 <link rel="stylesheet" href="./css/styles.css">
 <script>
   try {
-    var t = localStorage.getItem('bcg-theme');
-    if (t) t = JSON.parse(t);
+    var t = JSON.parse(localStorage.getItem('bcg-theme') || 'null');
     if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
     var fs = JSON.parse(localStorage.getItem('bcg-fs') || '100');
@@ -56,12 +55,12 @@
 
 <header class="site-header" role="banner">
   <div class="header-inner">
-    <a class="brand" href="#home" aria-label="Kapitan Guide, home">
+    <a class="brand" href="#home" aria-label="Kapitan Guide" data-i18n-aria="brandAria">
       <img src="./icons/icon-96.png" width="36" height="36" alt="" class="brand-logo">
       <span class="brand-text"><strong>Kapitan Guide</strong><small>Pasig City &middot; 2028 BSKE</small></span>
     </a>
-    <nav class="top-nav" aria-label="Primary">
-      <a href="#countdown" data-i18n="nCountdown">Countdown</a>
+    <nav class="top-nav" aria-label="Primary" data-i18n-aria="navPrimary">
+      <a href="#countdown" data-i18n="nCountdown">Milestones</a>
       <a href="#law" data-i18n="nLegal">Legal</a>
       <a href="#eligibility" data-i18n="nEligible">Eligibility</a>
       <a href="#budget" data-i18n="nBudget">Budget</a>
@@ -71,10 +70,10 @@
     </nav>
     <div class="header-actions">
       <span id="net-badge" class="net-badge online" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="net-text">Online</span></span>
-      <button type="button" id="lang-toggle" class="icon-btn txt-btn" aria-label="Switch language to Filipino" title="English / Filipino">EN</button>
-      <button type="button" id="fs-down" class="icon-btn txt-btn" aria-label="Decrease text size">A-</button>
-      <button type="button" id="fs-up" class="icon-btn txt-btn" aria-label="Increase text size">A+</button>
-      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" aria-pressed="false">
+      <button type="button" id="lang-toggle" class="icon-btn txt-btn" aria-label="Switch language to Filipino">EN</button>
+      <button type="button" id="fs-down" class="icon-btn txt-btn" aria-label="Decrease text size" data-i18n-aria="fsDown">A-</button>
+      <button type="button" id="fs-up" class="icon-btn txt-btn" aria-label="Increase text size" data-i18n-aria="fsUp">A+</button>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" data-i18n-aria="themeAria" aria-pressed="false">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.4A5.5 5.5 0 0 1 13.4 3.1C13 3 12.5 3 12 3z"/></svg>
       </button>
     </div>
@@ -96,135 +95,141 @@
     <p class="eyebrow" data-i18n="eyebrow">Unofficial civic guide</p>
     <h1 data-i18n="h1">Pasig City Punong Barangay Candidate &amp; Governance Guide</h1>
     <div class="alert alert-warn" role="note">
-      <strong data-i18n="scTitle">Court status advisory:</strong>
-      <span data-i18n="scBody">Republic Act No. 12326 (signed September 24, 2026) moved the Barangay and SK Elections to the second Monday of November 2028 and set a five-year term. The Supreme Court upheld RA 12326 on November 6, 2026, but a motion for partial reconsideration was filed on November 10, 2026. Verify the final COMELEC implementing resolutions before you act.</span>
+      <strong data-i18n="scTitle">Supreme Court status:</strong>
+      <span data-i18n="scBody">On November 6, 2026, the Supreme Court upheld the constitutionality of RA 12326, which provides for the 5-year term, the 2-consecutive-term limit, the incumbent transitory rule and the November 13, 2028 BSKE schedule. A motion for partial reconsideration was filed on November 10, 2026, so monitor the final COMELEC implementing resolutions before you act.</span>
     </div>
     <p class="lead" data-i18n="lead">Count down to election day, check your eligibility and term limits, plan your campaign budget, track your filing, and look up all 30 barangays of Pasig. Works offline once installed.</p>
     <div class="cta-row">
       <a class="btn" href="#eligibility" data-i18n="ctaElig">Check my eligibility</a>
       <a class="btn btn-outline" href="#budget" data-i18n="ctaBudget">Plan my budget</a>
+      <button type="button" class="btn btn-outline no-print" id="print-dossier" data-i18n="printDossier">Print / Save PDF dossier</button>
     </div>
-    <dl class="stats">
-      <div><dt data-i18n="stBrgy">Barangays</dt><dd>30</dd></div>
-      <div><dt data-i18n="stDist">Councilor districts</dt><dd>22 + 8</dd></div>
-      <div><dt data-i18n="stTerm">Term (RA 12326)</dt><dd data-i18n="stTermV">5 years</dd></div>
-      <div><dt data-i18n="stElec">Election day</dt><dd>Nov 13, 2028</dd></div>
-    </dl>
+    <div class="bento" role="group" aria-label="Key facts" data-i18n-aria="bentoAria">
+      <div class="bento-card hl">
+        <small data-i18n="bElecL">Election date</small>
+        <strong>Nov 13, 2028</strong>
+        <span class="cd-line" id="cd-line" role="timer" aria-live="off">--</span>
+      </div>
+      <div class="bento-card">
+        <small data-i18n="bTermL">Term of office</small>
+        <strong data-i18n="bTermV">5-Year</strong>
+        <span class="lbl" data-i18n="bTermS">RA 12326 Sec. 1</span>
+      </div>
+      <div class="bento-card">
+        <small data-i18n="bLimL">Maximum limit</small>
+        <strong data-i18n="bLimV">2-Term</strong>
+        <span class="lbl" data-i18n="bLimS">Consecutive, same position</span>
+      </div>
+      <div class="bento-card">
+        <small data-i18n="bCapL">Spending cap</small>
+        <strong>&#8369;5.00/<span data-i18n="bCapV">Voter</span></strong>
+        <span class="lbl" data-i18n="bCapS">RA 7166, unaffiliated candidate</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="countdown" class="section" aria-labelledby="cd-h">
   <div class="wrap">
-    <h2 id="cd-h" data-i18n="cdH">Countdown to November 13, 2028</h2>
-    <div class="card cd-card" aria-live="off">
-      <div class="cd-grid" id="cd-grid" role="timer" aria-label="Time remaining until November 13, 2028">
-        <div class="cd-box"><span id="cd-d">0</span><small data-i18n="days">days</small></div>
-        <div class="cd-box"><span id="cd-h2">0</span><small data-i18n="hours">hours</small></div>
-        <div class="cd-box"><span id="cd-m">0</span><small data-i18n="mins">minutes</small></div>
-        <div class="cd-box"><span id="cd-s">0</span><small data-i18n="secs">seconds</small></div>
-      </div>
-      <p class="small muted" id="cd-note">Counting to 12:00 AM, November 13, 2028 (Philippine time).</p>
-    </div>
-    <h3 data-i18n="msH">Key milestones</h3>
+    <h2 id="cd-h" data-i18n="cdH">Key milestones to November 13, 2028</h2>
     <ol class="timeline" id="ms-list"></ol>
-    <p class="small muted">Dates marked "TBA" are set by COMELEC calendar resolutions that have not been published here. This guide does not guess at them.</p>
+    <p class="small muted" data-i18n="msNote">Dates marked "TBA" are set by COMELEC calendar resolutions. This guide does not guess at them.</p>
   </div>
 </section>
 
 <section id="law" class="section alt" aria-labelledby="law-h">
   <div class="wrap">
     <h2 id="law-h" data-i18n="lawH">Legal &amp; election framework</h2>
-    <p class="muted">Summaries only, not legal advice. Check the text of the law and current COMELEC resolutions.</p>
-    <h3>How the schedule changed</h3>
+    <p class="muted" data-i18n="lawSub">Summaries only, not legal advice. Check the text of the law and current COMELEC resolutions.</p>
+    <h3 data-i18n="schedH">How the schedule changed</h3>
     <ol class="timeline">
-      <li><strong>August 2025 &mdash; RA 12232:</strong> Postponed the December 2025 BSKE to the first Monday of November 2026 and set a four-year term.</li>
-      <li><strong>September 24, 2026 &mdash; RA 12326:</strong> Cancelled the November 2, 2026 elections, fixed the term at five years and set the next elections for the second Monday of November 2028, and every five years after.</li>
-      <li><strong>November 6, 2026:</strong> The Supreme Court upheld RA 12326. A motion for partial reconsideration was filed on November 10, 2026.</li>
+      <li data-i18n="sched1"><strong>August 2025 &mdash; RA 12232:</strong> Postponed the December 2025 BSKE to the first Monday of November 2026 and set a four-year term.</li>
+      <li data-i18n="sched2"><strong>September 24, 2026 &mdash; RA 12326:</strong> Cancelled the November 2, 2026 elections, fixed the term at five years and set the next elections for the second Monday of November 2028, and every five years after.</li>
+      <li data-i18n="sched3"><strong>November 6, 2026:</strong> The Supreme Court upheld RA 12326. A motion for partial reconsideration was filed on November 10, 2026.</li>
     </ol>
-    <div class="grid two">
-      <article class="card">
-        <h3>RA 12326 key provisions</h3>
-        <ul>
-          <li><strong>Sec. 1 &mdash; Term and limits:</strong> Five-year term. Barangay officials may serve no more than <strong>two (2) consecutive terms</strong> in the same position (SK officials: one term). Voluntary renunciation does not interrupt a full term.</li>
-          <li><strong>Election date:</strong> Second Monday of November 2028 (November 13, 2028).</li>
-          <li><strong>Sec. 4-B &mdash; Training:</strong> DILG, with TESDA, COMELEC and state universities and colleges (SUCs), to institutionalize continuing training and capacity-building for barangay officials and SK members.</li>
-          <li><strong>Sec. 5 &mdash; Transitory rule:</strong> Because terms were extended by two years, incumbents are treated as having completed one term. Those serving their last permitted term in the same position cannot run for that position in November 2028.</li>
-          <li><strong>Sec. 6:</strong> Incumbents are not exempt from pending or future administrative, civil or criminal cases.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>RA 7160, Sec. 39 &mdash; Qualifications</h3>
-        <ul class="ticks">
-          <li>Citizen of the Philippines.</li>
-          <li>Registered voter in the barangay where you will run.</li>
-          <li>Resident of that barangay for at least one (1) year immediately before election day (cutoff: <strong>November 13, 2027</strong>).</li>
-          <li>Able to read and write Filipino or any other local language or dialect.</li>
-          <li>At least 18 years old on election day.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>RA 7160, Sec. 40 &mdash; Disqualifications</h3>
-        <ul class="cross">
-          <li>Final sentence for a moral-turpitude offense, or one punishable by 1+ year imprisonment, within two years after serving.</li>
-          <li>Removed from office through an administrative case.</li>
-          <li>Final conviction for violating the oath of allegiance.</li>
-          <li>Dual citizenship.</li>
-          <li>Fugitive from justice.</li>
-          <li>Permanent resident or immigrant abroad, without the required waiver.</li>
-          <li>Insane or feeble-minded.</li>
-        </ul>
-        <p class="small muted">The Omnibus Election Code adds other grounds. Barangay elections are non-partisan.</p>
-      </article>
-    </div>
+
+    <details class="acc" open>
+      <summary data-i18n="accRA">RA 12326 key provisions</summary>
+      <div class="acc-body"><ul>
+        <li data-i18n="ra1"><strong>Sec. 1 &mdash; Term and limits:</strong> Five-year term. Barangay officials may serve no more than <strong>two (2) consecutive terms</strong> in the same position (SK officials: one term). Voluntary renunciation does not interrupt a full term.</li>
+        <li data-i18n="ra2"><strong>Election date:</strong> Second Monday of November 2028 (November 13, 2028), and every five years after.</li>
+        <li data-i18n="ra3"><strong>Sec. 4-B &mdash; Training:</strong> DILG, with TESDA, COMELEC and state universities and colleges (SUCs), to institutionalize continuing training and capacity-building for barangay officials and SK members.</li>
+        <li data-i18n="ra4"><strong>Sec. 5 &mdash; Transitory rule:</strong> Because terms were extended by two years, incumbents are treated as having completed one term. Those serving their last permitted term in the same position cannot run for that position in November 2028.</li>
+        <li data-i18n="ra5"><strong>Sec. 6:</strong> Incumbents are not exempt from pending or future administrative, civil or criminal cases.</li>
+      </ul></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="accS39">RA 7160, Sec. 39 &mdash; Qualifications</summary>
+      <div class="acc-body"><ul class="ticks">
+        <li data-i18n="q1">Citizen of the Philippines.</li>
+        <li data-i18n="q2">Registered voter in the barangay where you will run.</li>
+        <li data-i18n="q3">Resident of that barangay for at least one (1) year immediately before election day (cutoff: <strong>November 13, 2027</strong>).</li>
+        <li data-i18n="q4">Able to read and write Filipino or any other local language or dialect.</li>
+        <li data-i18n="q5">At least 18 years old on election day.</li>
+      </ul></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="accS40">RA 7160, Sec. 40 &mdash; Disqualifications</summary>
+      <div class="acc-body"><ul class="cross">
+        <li data-i18n="d1">Final sentence for a moral-turpitude offense, or one punishable by 1+ year imprisonment, within two years after serving.</li>
+        <li data-i18n="d2">Removed from office through an administrative case.</li>
+        <li data-i18n="d3">Final conviction for violating the oath of allegiance.</li>
+        <li data-i18n="d4">Dual citizenship.</li>
+        <li data-i18n="d5">Fugitive from justice.</li>
+        <li data-i18n="d6">Permanent resident or immigrant abroad, without the required waiver.</li>
+        <li data-i18n="d7">Insane or feeble-minded.</li>
+      </ul>
+      <p class="small muted" data-i18n="dNote">The Omnibus Election Code adds other grounds. Barangay elections are non-partisan.</p></div>
+    </details>
   </div>
 </section>
 
 <section id="eligibility" class="section" aria-labelledby="el-h">
   <div class="wrap">
     <h2 id="el-h" data-i18n="elH">Eligibility &amp; term-limit checker</h2>
-    <p class="muted">Answer each question. Nothing leaves your device.</p>
+    <p class="muted" data-i18n="elSub">Answer each question. Nothing leaves your device.</p>
     <form id="el-form" class="card form" novalidate>
       <div class="field">
-        <label for="el-barangay">Barangay you intend to run in</label>
-        <select id="el-barangay" required><option value="">Select a barangay</option></select>
+        <label for="el-barangay" data-i18n="elBrgy">Barangay you intend to run in</label>
+        <select id="el-barangay" required><option value="" data-i18n="elSelect">Select a barangay</option></select>
       </div>
       <div class="field">
-        <label for="el-dob">Your date of birth</label>
+        <label for="el-dob" data-i18n="elDob">Your date of birth</label>
         <input type="date" id="el-dob" required>
       </div>
       <div class="field">
-        <label for="el-since">Date you started living in that barangay</label>
+        <label for="el-since" data-i18n="elSince">Date you started living in that barangay</label>
         <input type="date" id="el-since" required>
       </div>
       <fieldset class="field">
-        <legend>Citizenship and registration</legend>
-        <label class="check"><input type="checkbox" id="el-citizen"> <span>I am a Filipino citizen</span></label>
-        <label class="check"><input type="checkbox" id="el-voter"> <span>I am (or will be) a registered voter in that barangay</span></label>
-        <label class="check"><input type="checkbox" id="el-literate"> <span>I can read and write Filipino or another local language/dialect</span></label>
+        <legend data-i18n="elLegend1">Citizenship and registration</legend>
+        <label class="check"><input type="checkbox" id="el-citizen"> <span data-i18n="elCit">I am a Filipino citizen</span></label>
+        <label class="check"><input type="checkbox" id="el-voter"> <span data-i18n="elVot">I am (or will be) a registered voter in that barangay</span></label>
+        <label class="check"><input type="checkbox" id="el-literate"> <span data-i18n="elLit">I can read and write Filipino or another local language/dialect</span></label>
       </fieldset>
       <fieldset class="field">
-        <legend>Incumbent / Kagawad term-limit toggle</legend>
-        <label class="check"><input type="checkbox" id="el-incumbent"> <span>I am a current barangay official (Punong Barangay or Kagawad)</span></label>
+        <legend data-i18n="elLegend2">Incumbent / Kagawad term-limit toggle</legend>
+        <label class="check"><input type="checkbox" id="el-incumbent"> <span data-i18n="elInc">I am a current barangay official (Punong Barangay or Kagawad)</span></label>
         <div id="el-inc-box" hidden>
-          <label for="el-terms">Full consecutive terms you completed in the position you want to run for <span class="small muted">(before your current extended term)</span></label>
+          <label for="el-terms" data-i18n="elTerms">Full consecutive terms you completed in the position you want to run for (before your current extended term)</label>
           <select id="el-terms">
-            <option value="0">0 &mdash; I was elected for the first time in 2023</option>
+            <option value="0" data-i18n="elT0">0 - first elected in 2023</option>
             <option value="1">1</option>
             <option value="2">2</option>
-            <option value="3">3 or more</option>
+            <option value="3" data-i18n="elT3">3 or more</option>
           </select>
-          <p class="small muted">Under RA 12326 Sec. 5, your current extended term counts as a completed term, and the limit is two consecutive terms in the same position. Terms in a different position (for example Kagawad then Punong Barangay) are counted separately.</p>
+          <p class="small muted" data-i18n="elIncNote">Under RA 12326 Sec. 5, your current extended term counts as a completed term, and the limit is two consecutive terms in the same position. Terms in a different position (for example Kagawad then Punong Barangay) are counted separately.</p>
         </div>
       </fieldset>
       <fieldset class="field">
-        <legend>Disqualification check (tick any that apply)</legend>
-        <label class="check"><input type="checkbox" class="el-dq" value="Final conviction for a moral-turpitude offense or a crime punishable by 1+ year, within 2 years after serving"> <span>Final conviction for a moral-turpitude offense or a crime punishable by 1+ year, within 2 years after serving</span></label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Removed from office through an administrative case"> <span>Removed from office through an administrative case</span></label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Final conviction for violating the oath of allegiance"> <span>Final conviction for violating the oath of allegiance</span></label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Dual citizenship"> <span>Dual citizenship</span></label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Fugitive from justice"> <span>Fugitive from justice</span></label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Permanent resident or immigrant abroad without a waiver"> <span>Permanent resident/immigrant abroad without a waiver</span></label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Declared insane or feeble-minded"> <span>Declared insane or feeble-minded</span></label>
+        <legend data-i18n="elLegend3">Disqualification check (tick any that apply)</legend>
+        <label class="check"><input type="checkbox" class="el-dq" data-k="dq1"> <span data-i18n="dq1">Final conviction for a moral-turpitude offense or a crime punishable by 1+ year, within 2 years after serving</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" data-k="dq2"> <span data-i18n="dq2">Removed from office through an administrative case</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" data-k="dq3"> <span data-i18n="dq3">Final conviction for violating the oath of allegiance</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" data-k="dq4"> <span data-i18n="dq4">Dual citizenship</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" data-k="dq5"> <span data-i18n="dq5">Fugitive from justice</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" data-k="dq6"> <span data-i18n="dq6">Permanent resident/immigrant abroad without a waiver</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" data-k="dq7"> <span data-i18n="dq7">Declared insane or feeble-minded</span></label>
       </fieldset>
       <div class="btn-row">
         <button type="submit" class="btn" data-i18n="assess">Assess eligibility</button>
@@ -238,71 +243,80 @@
 <section id="budget" class="section alt" aria-labelledby="bg-h">
   <div class="wrap">
     <h2 id="bg-h" data-i18n="bgH">Campaign budget &amp; SOCE calculator</h2>
-    <p class="muted">RA 7166 sets a spending limit of <strong>&#8369;5.00 per registered voter</strong> for a candidate not nominated by a party. Confirm the current figure in the COMELEC resolution for the 2028 BSKE.</p>
+    <p class="muted" data-i18n="bgSub">RA 7166 sets a spending limit of <strong>&#8369;5.00 per registered voter</strong> for a candidate not nominated by a party. Confirm the current figure in the COMELEC resolution for the 2028 BSKE.</p>
     <div class="card form">
       <div class="field">
-        <label for="calc-brgy">Barangay</label>
-        <select id="calc-brgy"><option value="">Custom</option></select>
+        <label for="calc-brgy" data-i18n="bgBrgy">Barangay</label>
+        <select id="calc-brgy"><option value="" data-i18n="bgCustom">Custom</option></select>
       </div>
       <div class="field">
-        <label for="calc-voters">Registered voters in the barangay</label>
-        <input type="number" id="calc-voters" min="0" step="1" inputmode="numeric" placeholder="e.g. 12000">
-        <p class="small muted">Get the current count from the COMELEC Pasig City Election Office. Presets below are illustrative sizes only, not actual voter counts.</p>
+        <label for="calc-voters" data-i18n="bgVoters">Registered voters in the barangay</label>
+        <input type="number" id="calc-voters" min="0" step="1" inputmode="numeric" placeholder="12000">
+        <p class="small muted" data-i18n="bgVotersNote">Get the current count from the COMELEC Pasig City Election Office. The presets below are illustrative sizes only, not actual voter counts.</p>
       </div>
-      <div class="chip-row" role="group" aria-label="Voter count presets">
-        <button type="button" class="chip" data-voters="3000">Small ~3,000</button>
-        <button type="button" class="chip" data-voters="10000">Medium ~10,000</button>
-        <button type="button" class="chip" data-voters="25000">Large ~25,000</button>
-        <button type="button" class="chip" data-voters="50000">Mega ~50,000 (e.g. Pinagbuhatan, Manggahan scale)</button>
+      <div class="chip-row" role="group" aria-label="Voter count presets" data-i18n-aria="presetAria">
+        <button type="button" class="chip" data-voters="3000" data-i18n="pSmall">Small ~3,000</button>
+        <button type="button" class="chip" data-voters="10000" data-i18n="pMed">Medium ~10,000</button>
+        <button type="button" class="chip" data-voters="25000" data-i18n="pLarge">Large ~25,000</button>
+        <button type="button" class="chip" data-voters="50000" data-i18n="pMega">Mega ~50,000 (Pinagbuhatan / Manggahan scale)</button>
       </div>
       <div class="budget-sum" aria-live="polite">
-        <div><small>Spending limit</small><strong id="b-limit">&#8369;0.00</strong></div>
-        <div><small>Expenses so far</small><strong id="b-spent">&#8369;0.00</strong></div>
-        <div><small>Remaining</small><strong id="b-left">&#8369;0.00</strong></div>
-        <div><small>Contributions</small><strong id="b-contrib">&#8369;0.00</strong></div>
+        <div><small data-i18n="sLimit">Spending limit</small><strong id="b-limit">&#8369;0.00</strong></div>
+        <div><small data-i18n="sSpent">Expenses so far</small><strong id="b-spent">&#8369;0.00</strong></div>
+        <div><small data-i18n="sLeft">Remaining</small><strong id="b-left">&#8369;0.00</strong></div>
+        <div><small data-i18n="sContrib">Contributions</small><strong id="b-contrib">&#8369;0.00</strong></div>
       </div>
-      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Share of spending limit used" id="b-bar"><span id="b-fill"></span></div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Share of spending limit used" data-i18n-aria="bAria" id="b-bar"><span id="b-fill"></span></div>
       <p class="small" id="b-msg" role="status"></p>
     </div>
 
-    <h3>Itemized ledger (SOCE)</h3>
+    <h3 data-i18n="ledgerH">Itemized ledger (SOCE)</h3>
     <form id="tx-form" class="card form" novalidate>
-      <div class="field"><label for="tx-type">Type</label>
-        <select id="tx-type"><option value="expense">Expense</option><option value="contribution">Contribution received</option></select></div>
-      <div class="field"><label for="tx-date">Date</label><input type="date" id="tx-date" required></div>
-      <div class="field"><label for="tx-desc">Description / payee or donor</label><input type="text" id="tx-desc" maxlength="120" required placeholder="e.g. Tarpaulin printing, Juan Dela Cruz"></div>
-      <div class="field"><label for="tx-amt">Amount (&#8369;)</label><input type="number" id="tx-amt" min="0.01" step="0.01" inputmode="decimal" required></div>
-      <div class="btn-row"><button type="submit" class="btn">Add entry</button></div>
+      <div class="field"><label for="tx-type" data-i18n="txType">Type</label>
+        <select id="tx-type"><option value="expense" data-i18n="tExpense">Expense</option><option value="contribution" data-i18n="tContrib">Contribution received</option></select></div>
+      <div class="field"><label for="tx-cat" data-i18n="txCat">Category</label>
+        <select id="tx-cat">
+          <option value="print" data-i18n="cPrint">Printing and materials</option>
+          <option value="media" data-i18n="cMedia">Media and advertising</option>
+          <option value="events" data-i18n="cEvents">Events and venue</option>
+          <option value="transport" data-i18n="cTransport">Transport and food</option>
+          <option value="staff" data-i18n="cStaff">Staff and watchers</option>
+          <option value="other" data-i18n="cOther">Other</option>
+        </select></div>
+      <div class="field"><label for="tx-date" data-i18n="txDate">Date</label><input type="date" id="tx-date" required></div>
+      <div class="field"><label for="tx-desc" data-i18n="txDesc">Description / payee or donor</label><input type="text" id="tx-desc" maxlength="120" required></div>
+      <div class="field"><label for="tx-amt" data-i18n="txAmt">Amount (&#8369;)</label><input type="number" id="tx-amt" min="0.01" step="0.01" inputmode="decimal" required></div>
+      <div class="btn-row"><button type="submit" class="btn" data-i18n="txAdd">Add entry</button></div>
       <p id="tx-err" class="small err" role="alert" hidden></p>
     </form>
     <div class="table-wrap"><table class="tx-table" id="tx-table">
-      <caption class="sr-only">Itemized contributions and expenses</caption>
-      <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Description</th><th scope="col" class="num">Amount</th><th scope="col" class="no-print"><span class="sr-only">Remove</span></th></tr></thead>
+      <caption class="sr-only" data-i18n="txCap">Itemized contributions and expenses</caption>
+      <thead><tr><th scope="col" data-i18n="thDate">Date</th><th scope="col" data-i18n="thType">Type</th><th scope="col" data-i18n="thCat">Category</th><th scope="col" data-i18n="thDesc">Description</th><th scope="col" class="num" data-i18n="thAmt">Amount</th><th scope="col" class="no-print"><span class="sr-only" data-i18n="thRemove">Remove</span></th></tr></thead>
       <tbody id="tx-body"></tbody>
     </table></div>
-    <p id="tx-empty" class="muted">No entries yet.</p>
+    <p id="tx-empty" class="muted" data-i18n="txEmpty">No entries yet.</p>
     <div class="btn-row no-print">
-      <button type="button" class="btn btn-outline" id="tx-csv">Export CSV</button>
-      <button type="button" class="btn btn-outline" id="tx-print">Print SOCE summary</button>
-      <button type="button" class="btn btn-ghost" id="tx-clear">Clear ledger</button>
+      <button type="button" class="btn btn-outline" id="tx-csv" data-i18n="txCsv">Export CSV</button>
+      <button type="button" class="btn btn-outline" id="tx-print" data-i18n="txPrint">Print SOCE summary</button>
+      <button type="button" class="btn btn-ghost" id="tx-clear" data-i18n="txClear">Clear ledger</button>
     </div>
-    <p class="small muted">File your Statement of Contributions and Expenditures (SOCE) within <strong>30 days after election day</strong>. This ledger is a personal worksheet, not the official COMELEC form.</p>
+    <p class="small muted" data-i18n="soceNote">File your Statement of Contributions and Expenditures (SOCE) within <strong>30 days after election day</strong>. This ledger is a personal worksheet, not the official COMELEC form.</p>
   </div>
 </section>
 
 <section id="checklist" class="section" aria-labelledby="ck-h">
   <div class="wrap">
     <h2 id="ck-h" data-i18n="ckH">COC filing &amp; post-election checklist</h2>
-    <p class="muted">Your progress is saved on this device.</p>
+    <p class="muted" data-i18n="ckSub">Your progress is saved on this device.</p>
     <div class="progress-wrap">
-      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Checklist progress" id="ck-bar"><span id="ck-fill"></span></div>
-      <p id="ck-label" class="small">0 of 0 done</p>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Checklist progress" data-i18n-aria="ckAria" id="ck-bar"><span id="ck-fill"></span></div>
+      <p id="ck-label" class="small"></p>
     </div>
     <div id="ck-list"></div>
     <div class="btn-row no-print">
-      <button type="button" class="btn btn-outline" id="ck-json">Export JSON backup</button>
-      <button type="button" class="btn btn-outline" id="ck-print">Print</button>
-      <button type="button" class="btn btn-ghost" id="ck-reset">Reset all</button>
+      <button type="button" class="btn btn-outline" id="ck-json" data-i18n="ckJson">Export JSON backup</button>
+      <button type="button" class="btn btn-outline" id="ck-print" data-i18n="ckPrint">Print</button>
+      <button type="button" class="btn btn-ghost" id="ck-reset" data-i18n="ckReset">Reset all</button>
     </div>
   </div>
 </section>
@@ -310,111 +324,133 @@
 <section id="directory" class="section alt" aria-labelledby="dir-h">
   <div class="wrap">
     <h2 id="dir-h" data-i18n="dirH">Pasig City barangay directory</h2>
-    <p class="muted">Pasig has <strong>one congressional district</strong>. For the Sangguniang Panlungsod, it is divided into <strong>District 1 (22 barangays)</strong> and <strong>District 2 (8 barangays)</strong>.</p>
+    <p class="muted" data-i18n="dirSub">Pasig has <strong>one congressional district</strong>. For the Sangguniang Panlungsod, it is divided into <strong>District 1 (22 barangays)</strong> and <strong>District 2 (8 barangays)</strong>.</p>
     <div class="grid two">
-      <article class="card"><h3>COMELEC Pasig City</h3>
-        <p>Pasig City Hall, Brgy. San Nicolas. A public procedure listing shows the 1st District office on the 5th floor and the 2nd District office on the 3rd floor, tel. 641-1924.</p>
-        <p class="small muted">Confirm the office location, hours and filing schedule with COMELEC before you go.</p></article>
-      <article class="card"><h3>DILG &amp; Liga ng mga Barangay</h3>
-        <p><strong>DILG Pasig City Field Office:</strong> supervises barangay governance and training (RA 12326 Sec. 4-B).</p>
-        <p><strong>Liga ng mga Barangay &ndash; Pasig Chapter:</strong> based at Pasig City Hall, Brgy. San Nicolas.</p>
-        <p class="small muted">Call ahead to confirm current offices and contact numbers.</p></article>
+      <article class="card"><h3 data-i18n="comH">COMELEC Pasig City</h3>
+        <p data-i18n="comP1">Pasig City Hall, Brgy. San Nicolas. A public procedure listing shows the 1st District office on the 5th floor and the 2nd District office on the 3rd floor, tel. 641-1924.</p>
+        <p class="small muted" data-i18n="comP2">Confirm the office location, hours and filing schedule with COMELEC before you go.</p></article>
+      <article class="card"><h3 data-i18n="dilgH">DILG &amp; Liga ng mga Barangay</h3>
+        <p data-i18n="dilgP1"><strong>DILG Pasig City Field Office:</strong> supervises barangay governance and training (RA 12326 Sec. 4-B).</p>
+        <p data-i18n="dilgP2"><strong>Liga ng mga Barangay &ndash; Pasig Chapter:</strong> based at Pasig City Hall, Brgy. San Nicolas.</p>
+        <p class="small muted" data-i18n="dilgP3">Call ahead to confirm current offices and contact numbers.</p></article>
     </div>
     <div class="toolbar">
-      <div class="field grow">
-        <label for="dir-search">Search barangays</label>
-        <input type="search" id="dir-search" placeholder="Type a name, e.g. Kapitolyo" autocomplete="off">
+      <div class="field">
+        <label for="dir-search" data-i18n="dirSearch">Search barangays</label>
+        <input type="search" id="dir-search" autocomplete="off" placeholder="Kapitolyo" data-i18n-ph="dirPh">
       </div>
       <div class="field">
-        <label for="dir-filter">Show</label>
+        <label for="dir-filter" data-i18n="dirShow">Show</label>
         <select id="dir-filter">
-          <option value="all">All (30)</option>
-          <option value="1">District 1 (22)</option>
-          <option value="2">District 2 (8)</option>
-          <option value="saved">Saved by me</option>
+          <option value="all" data-i18n="fAll">All (30)</option>
+          <option value="1" data-i18n="fD1">District 1 (22)</option>
+          <option value="2" data-i18n="fD2">District 2 (8)</option>
+          <option value="saved" data-i18n="fSaved">Saved by me</option>
         </select>
       </div>
     </div>
     <p id="dir-count" class="small" role="status" aria-live="polite"></p>
     <ul id="dir-list" class="dir-grid"></ul>
-    <p class="small muted">Population: 2024 Census of Population (POPCEN), as published in public barangay directories, shown only for the five largest barangays.</p>
+    <p class="small muted" data-i18n="dirPop">Population: 2024 Census of Population (POPCEN), as published in public barangay directories, shown only for the five largest barangays.</p>
   </div>
 </section>
 
 <section id="playbook" class="section" aria-labelledby="pb-h">
   <div class="wrap">
     <h2 id="pb-h" data-i18n="pbH">First 100 days &amp; Katarungang Pambarangay playbook</h2>
-    <p class="muted">Based on RA 7160 Sec. 389 and related provisions. Verify the current details with DILG.</p>
+    <p class="muted" data-i18n="pbSub">Based on RA 7160 Sec. 389 and related provisions. Verify the current details with DILG.</p>
     <ol class="steps">
-      <li><strong>Days 1&ndash;15: Set up your team.</strong> Appoint the Barangay Secretary and Treasurer (with the concurrence required by law), and organize your barangay tanods. Constitute the <em>Lupong Tagapamayapa</em> within 15 days from the start of your term.</li>
-      <li><strong>Days 1&ndash;30: Take stock.</strong> Review the barangay's budget, cash position, pending contracts, programs and records. Meet the Sangguniang Barangay and the SK chairperson.</li>
-      <li><strong>Days 30&ndash;60: Convene and plan.</strong> Organize the Barangay Development Council, which you chair, and begin the Barangay Development Plan. Activate the peace and order, anti-drug (BADAC) and disaster (BDRRMC) committees.</li>
-      <li><strong>Days 60&ndash;100: Show results.</strong> Hold a Barangay Assembly, publish your plan and budget priorities, and attend the training programs that DILG, TESDA, COMELEC and SUCs run under RA 12326 Sec. 4-B.</li>
+      <li data-i18n="pb1"><strong>Days 1&ndash;15: Set up your team.</strong> Appoint the Barangay Secretary and Treasurer (with the concurrence required by law), and organize your barangay tanods. Constitute the <em>Lupong Tagapamayapa</em> within 15 days from the start of your term.</li>
+      <li data-i18n="pb2"><strong>Days 1&ndash;30: Take stock.</strong> Review the barangay's budget, cash position, pending contracts, programs and records. Meet the Sangguniang Barangay and the SK chairperson.</li>
+      <li data-i18n="pb3"><strong>Days 30&ndash;60: Convene and plan.</strong> Organize the Barangay Development Council, which you chair, and begin the Barangay Development Plan. Activate the peace and order, anti-drug (BADAC) and disaster (BDRRMC) committees.</li>
+      <li data-i18n="pb4"><strong>Days 60&ndash;100: Show results.</strong> Hold a Barangay Assembly, publish your plan and budget priorities, and attend the training that DILG, TESDA, COMELEC and SUCs run under RA 12326 Sec. 4-B.</li>
     </ol>
-    <div class="grid two">
-      <article class="card"><h3>Executive powers (Sec. 389)</h3>
-        <ul>
-          <li>Enforce laws and ordinances within the barangay.</li>
-          <li>Sign contracts for the barangay, with the authorization of the Sangguniang Barangay.</li>
-          <li>Maintain public order and call on the police when needed.</li>
-          <li>Preside over Sangguniang Barangay sessions and barangay assemblies.</li>
-          <li>Prepare the annual executive budget proposal.</li>
-          <li>Organize an emergency response group for calamities and disorder.</li>
-        </ul>
-      </article>
-      <article class="card"><h3>Barangay Assembly</h3>
-        <p>The Barangay Assembly, made up of residents who are registered voters, meets <strong>at least twice a year</strong>. You call it to order and report on the barangay's finances and programs.</p>
-      </article>
-      <article class="card"><h3>Katarungang Pambarangay timeline</h3>
+    <details class="acc" open>
+      <summary data-i18n="accS389">Executive powers (RA 7160 Sec. 389)</summary>
+      <div class="acc-body"><ul>
+        <li data-i18n="e1">Enforce laws and ordinances within the barangay.</li>
+        <li data-i18n="e2">Sign contracts for the barangay, with the authorization of the Sangguniang Barangay.</li>
+        <li data-i18n="e3">Maintain public order and call on the police when needed.</li>
+        <li data-i18n="e4">Preside over Sangguniang Barangay sessions and barangay assemblies.</li>
+        <li data-i18n="e5">Prepare the annual executive budget proposal.</li>
+        <li data-i18n="e6">Organize an emergency response group for calamities and disorder.</li>
+      </ul></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="accKP">Katarungang Pambarangay timeline</summary>
+      <div class="acc-body">
         <ol>
-          <li><strong>15 days:</strong> mediation by the Punong Barangay.</li>
-          <li><strong>15 days:</strong> conciliation by the <em>Pangkat ng Tagapagkasundo</em> if mediation fails (extendable by up to 15 more days).</li>
-          <li><strong>10 days:</strong> a settlement becomes final and executory unless repudiated.</li>
+          <li data-i18n="kp1"><strong>15 days:</strong> mediation by the Punong Barangay.</li>
+          <li data-i18n="kp2"><strong>15 days:</strong> conciliation by the <em>Pangkat ng Tagapagkasundo</em> if mediation fails (extendable by up to 15 more days).</li>
+          <li data-i18n="kp3"><strong>10 days:</strong> a settlement becomes final and executory unless repudiated.</li>
         </ol>
-        <p class="small muted">Some disputes are exempt, for example those between residents of different cities, or offenses punishable by more than one year of imprisonment or a fine above &#8369;5,000.</p>
-      </article>
-      <article class="card"><h3>Honoraria &amp; benefits</h3>
-        <p>Barangay officials receive <strong>honoraria</strong> fixed by the Sangguniang Panlungsod within the law, plus statutory benefits. Ask the City Treasurer or DILG for the current rates, since they change by ordinance and circular.</p>
-      </article>
-    </div>
+        <p class="small muted" data-i18n="kpNote">Some disputes are exempt, for example those between residents of different cities, or offenses punishable by more than one year of imprisonment or a fine above &#8369;5,000.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="accAsm">Barangay Assembly</summary>
+      <div class="acc-body"><p data-i18n="asm">The Barangay Assembly, made up of residents who are registered voters, meets <strong>at least twice a year</strong>. You call it to order and report on the barangay's finances and programs.</p></div>
+    </details>
+    <details class="acc">
+      <summary data-i18n="accHon">Honoraria &amp; benefits</summary>
+      <div class="acc-body"><p data-i18n="hon">Barangay officials receive <strong>honoraria</strong> fixed by the Sangguniang Panlungsod within the law, plus statutory benefits. Ask the City Treasurer or DILG for the current rates, since they change by ordinance and circular.</p></div>
+    </details>
   </div>
 </section>
 
 <section class="section alt" aria-labelledby="src-h">
   <div class="wrap">
-    <h2 id="src-h">Sources &amp; disclaimer</h2>
+    <h2 id="src-h" data-i18n="srcH">Sources &amp; disclaimer</h2>
     <ul class="small">
-      <li>Text of Republic Act No. 12326 as reproduced on LawPlayer (the official text prevails).</li>
-      <li>Philstar, Tribune and NAMFREL reports on RA 12326 and the Supreme Court ruling.</li>
-      <li>Wikipedia (Pasig) for the councilor-district grouping; PNA and PCO reports on RA 12232.</li>
-      <li>RA 7160 (Local Government Code), RA 7166 and the Omnibus Election Code.</li>
+      <li data-i18n="src1">Text of Republic Act No. 12326 as reproduced on LawPlayer (the official text prevails).</li>
+      <li data-i18n="src2">Philstar, Tribune and NAMFREL reports on RA 12326 and the Supreme Court ruling.</li>
+      <li data-i18n="src3">Wikipedia (Pasig) for the councilor-district grouping; PNA and PCO reports on RA 12232.</li>
+      <li data-i18n="src4">RA 7160 (Local Government Code), RA 7166 and the Omnibus Election Code.</li>
     </ul>
-    <p class="small muted">Independent, unofficial reference. It is not legal advice or a COMELEC publication. Laws, rules and dates change; verify with COMELEC, DILG or a lawyer before you act.</p>
+    <p class="small muted" data-i18n="disc">Independent, unofficial reference. It is not legal advice or a COMELEC publication. Laws, rules and dates change; verify with COMELEC, DILG or a lawyer before you act.</p>
   </div>
 </section>
 </main>
 
-<footer class="site-footer"><div class="wrap"><p class="small">&copy; 2026 Kapitan Guide &middot; Unofficial civic information for Pasig City voters and candidates.</p>
-<button type="button" class="btn btn-sm btn-outline no-print" id="share-guide">Share this guide</button></div></footer>
+<footer class="site-footer"><div class="wrap">
+  <p class="small" data-i18n="foot">&copy; 2026 Kapitan Guide &middot; Unofficial civic information for Pasig City voters and candidates.</p>
+  <span class="btn-row no-print" style="margin:0">
+    <button type="button" class="btn btn-sm btn-outline" id="share-guide" data-i18n="shareGuide">Share this guide</button>
+    <button type="button" class="btn btn-sm btn-outline" id="print-dossier-2" data-i18n="printDossier">Print / Save PDF dossier</button>
+  </span>
+</div></footer>
 
-<nav class="bottom-nav" aria-label="Mobile">
-  <a href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg><span>Home</span></a>
-  <a href="#eligibility"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>Eligible</span></a>
-  <a href="#budget"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v12H3zm9 2.500a3.500 3.500 0 1 0 0 7 3.500 3.500 0 0 0 0-7z"/></svg><span>Budget</span></a>
-  <a href="#checklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h2v2H4zm4 0h12v2H8zM4 11h2v2H4zm4 0h12v2H8zM4 17h2v2H4zm4 0h12v2H8z"/></svg><span>Tasks</span></a>
-  <a href="#directory"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z"/></svg><span>Brgys</span></a>
-  <a href="#playbook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14v18l-7-4-7 4z"/></svg><span>Plan</span></a>
+<nav class="bottom-nav" aria-label="Mobile" data-i18n-aria="navMobile">
+  <a href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg><span data-i18n="mHome">Home</span></a>
+  <a href="#eligibility"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span data-i18n="mElig">Eligible</span></a>
+  <a href="#budget"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v12H3zm9 2.500a3.500 3.500 0 1 0 0 7 3.500 3.500 0 0 0 0-7z"/></svg><span data-i18n="mBudget">Budget</span></a>
+  <a href="#checklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h2v2H4zm4 0h12v2H8zM4 11h2v2H4zm4 0h12v2H8zM4 17h2v2H4zm4 0h12v2H8z"/></svg><span data-i18n="mTasks">Tasks</span></a>
+  <a href="#directory"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z"/></svg><span data-i18n="mBrgy">Brgys</span></a>
+  <a href="#playbook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14v18l-7-4-7 4z"/></svg><span data-i18n="mPlan">Plan</span></a>
 </nav>
 
 <div id="ios-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="ios-h" hidden>
   <div class="modal-box">
-    <h2 id="ios-h">Add to Home Screen</h2>
+    <h2 id="ios-h" data-i18n="iosH">Add to Home Screen</h2>
     <ol>
-      <li>Tap the <strong>Share</strong> button in Safari.</li>
-      <li>Scroll and tap <strong>Add to Home Screen</strong>.</li>
-      <li>Tap <strong>Add</strong>.</li>
+      <li data-i18n="ios1">Tap the <strong>Share</strong> button in Safari.</li>
+      <li data-i18n="ios2">Scroll and tap <strong>Add to Home Screen</strong>.</li>
+      <li data-i18n="ios3">Tap <strong>Add</strong>.</li>
     </ol>
-    <button type="button" class="btn" id="ios-close">Got it</button>
+    <button type="button" class="btn" id="ios-close" data-i18n="gotIt">Got it</button>
+  </div>
+</div>
+
+<div id="brgy-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bm-title" hidden>
+  <div class="modal-box">
+    <h2 id="bm-title"></h2>
+    <div id="bm-body"></div>
+    <div class="btn-row">
+      <button type="button" class="btn btn-sm" id="bm-check" data-i18n="bmCheck">Check eligibility</button>
+      <button type="button" class="btn btn-sm btn-outline" id="bm-budget" data-i18n="bmBudget">Spending limit</button>
+      <button type="button" class="btn btn-sm btn-outline" id="bm-share" data-i18n="bmShare">Share</button>
+      <button type="button" class="btn btn-sm btn-ghost" id="bm-close" data-i18n="close">Close</button>
+    </div>
   </div>
 </div>
 
