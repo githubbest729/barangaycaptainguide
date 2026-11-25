@@ -1,7 +1,7 @@
 /* Service worker: precache, network-first navigation with offline fallback,
    stale-while-revalidate for assets. Paths resolve against the SW scope so it
    works at /barangaycaptainguide/ on GitHub Pages and at / on a local server. */
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.1.0';
 const PRECACHE = 'bcg-precache-' + VERSION;
 const RUNTIME = 'bcg-runtime-' + VERSION;
 

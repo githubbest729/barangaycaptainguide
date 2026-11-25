@@ -1,8 +1,8 @@
 {
   "id": "/barangaycaptainguide/",
-  "name": "Pasig Punong Barangay Candidate & Legal Guide",
+  "name": "Pasig Punong Barangay Candidate & Governance Guide",
   "short_name": "Kapitan Guide",
-  "description": "Unofficial guide for Pasig City Punong Barangay candidates: RA 12326 (BSKE moved to 2028), eligibility checker, COC checklist, 30-barangay directory.",
+  "description": "Unofficial guide for Pasig City Punong Barangay candidates: RA 12326 (BSKE on Nov 13, 2028), countdown, eligibility and term-limit checker, budget and SOCE calculator, checklist, 30-barangay directory.",
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
@@ -112,6 +112,18 @@
       "name": "Barangay directory",
       "short_name": "Barangays",
       "url": "./#directory",
+      "icons": [
+        {
+          "src": "icons/icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Campaign budget",
+      "short_name": "Budget",
+      "url": "./#budget",
       "icons": [
         {
           "src": "icons/icon-96.png",

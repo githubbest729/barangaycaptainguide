@@ -3,67 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pasig Punong Barangay Candidate &amp; Legal Guide (2028 BSKE)</title>
-<meta name="description" content="Unofficial guide for aspiring Punong Barangay candidates in Pasig City: RA 12326 postponement to 2028, LGC Sec. 39-40 eligibility checker, COC and campaign checklist, 30-barangay directory.">
+<title>Pasig Punong Barangay Candidate &amp; Governance Guide (2028 BSKE)</title>
+<meta name="description" content="Unofficial guide for Pasig City Punong Barangay candidates: RA 12326 (BSKE on Nov 13, 2028), countdown, eligibility and term-limit checker, campaign budget and SOCE calculator, COC checklist, 30-barangay directory.">
 <link rel="canonical" href="https://githubbest729.github.io/barangaycaptainguide/">
 <meta name="theme-color" content="#0A2540">
 <meta name="color-scheme" content="light dark">
 
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
 
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Kapitan Guide">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pasig Punong Barangay Candidate &amp; Legal Guide (2028 BSKE)">
-<meta property="og:description" content="Eligibility checker, COC &amp; campaign checklist, and a 30-barangay directory for Pasig City. Updated for RA 12326 (elections moved to 2028).">
+<meta property="og:title" content="Pasig Punong Barangay Candidate &amp; Governance Guide (2028 BSKE)">
+<meta property="og:description" content="Countdown, eligibility and term-limit checker, budget and SOCE calculator, and a 30-barangay directory for Pasig City.">
 <meta property="og:url" content="https://githubbest729.github.io/barangaycaptainguide/">
 <meta property="og:image" content="https://githubbest729.github.io/barangaycaptainguide/images/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_PH">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pasig Punong Barangay Candidate &amp; Legal Guide (2028 BSKE)">
-<meta name="twitter:description" content="Eligibility checker, COC &amp; campaign checklist, and a 30-barangay directory for Pasig City.">
+<meta name="twitter:title" content="Pasig Punong Barangay Candidate &amp; Governance Guide (2028 BSKE)">
+<meta name="twitter:description" content="Countdown, eligibility checker, budget and SOCE calculator, and a 30-barangay directory for Pasig City.">
 <meta name="twitter:image" content="https://githubbest729.github.io/barangaycaptainguide/images/og-image.png">
 
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="./css/styles.css">
 <script>
-  try { var t = localStorage.getItem('bcg-theme');
+  try {
+    var t = localStorage.getItem('bcg-theme');
+    if (t) t = JSON.parse(t);
     if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t);
+    var fs = JSON.parse(localStorage.getItem('bcg-fs') || '100');
+    document.documentElement.style.fontSize = fs + '%';
+  } catch (e) {}
 </script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to main content</a>
+<a class="skip" href="#main" data-i18n="skip">Skip to main content</a>
 
 <div id="update-banner" class="banner banner-update" role="status" hidden>
-  <span>A new version is available.</span>
-  <button type="button" id="update-btn" class="btn btn-sm">Update now</button>
+  <span data-i18n="updAvail">A new version is available.</span>
+  <button type="button" id="update-btn" class="btn btn-sm" data-i18n="updNow">Update now</button>
 </div>
 
 <header class="site-header" role="banner">
   <div class="header-inner">
-    <a class="brand" href="#home" aria-label="Pasig Punong Barangay Guide, home">
-      <img src="icons/icon-96.png" width="36" height="36" alt="" class="brand-logo">
+    <a class="brand" href="#home" aria-label="Kapitan Guide, home">
+      <img src="./icons/icon-96.png" width="36" height="36" alt="" class="brand-logo">
       <span class="brand-text"><strong>Kapitan Guide</strong><small>Pasig City &middot; 2028 BSKE</small></span>
     </a>
     <nav class="top-nav" aria-label="Primary">
-      <a href="#law">Legal</a>
-      <a href="#eligibility">Eligibility</a>
-      <a href="#checklist">Checklist</a>
-      <a href="#directory">Barangays</a>
-      <a href="#duties">Duties</a>
+      <a href="#countdown" data-i18n="nCountdown">Countdown</a>
+      <a href="#law" data-i18n="nLegal">Legal</a>
+      <a href="#eligibility" data-i18n="nEligible">Eligibility</a>
+      <a href="#budget" data-i18n="nBudget">Budget</a>
+      <a href="#checklist" data-i18n="nChecklist">Checklist</a>
+      <a href="#directory" data-i18n="nBarangays">Barangays</a>
+      <a href="#playbook" data-i18n="nPlaybook">Playbook</a>
     </nav>
     <div class="header-actions">
       <span id="net-badge" class="net-badge online" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="net-text">Online</span></span>
+      <button type="button" id="lang-toggle" class="icon-btn txt-btn" aria-label="Switch language to Filipino" title="English / Filipino">EN</button>
+      <button type="button" id="fs-down" class="icon-btn txt-btn" aria-label="Decrease text size">A-</button>
+      <button type="button" id="fs-up" class="icon-btn txt-btn" aria-label="Increase text size">A+</button>
       <button type="button" id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" aria-pressed="false">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.5 0-1-.1-1.4A5.5 5.5 0 0 1 13.4 3.1C13 3 12.5 3 12 3z"/></svg>
       </button>
@@ -72,10 +82,10 @@
 </header>
 
 <div id="install-banner" class="banner banner-install" hidden>
-  <span>Install this guide for offline use.</span>
+  <span data-i18n="instMsg">Install this guide for offline use.</span>
   <span class="banner-actions">
-    <button type="button" id="install-btn" class="btn btn-sm">Install</button>
-    <button type="button" id="install-dismiss" class="btn btn-sm btn-ghost">Not now</button>
+    <button type="button" id="install-btn" class="btn btn-sm" data-i18n="instBtn">Install</button>
+    <button type="button" id="install-dismiss" class="btn btn-sm btn-ghost" data-i18n="notNow">Not now</button>
   </span>
 </div>
 
@@ -83,80 +93,100 @@
 
 <section id="home" class="hero">
   <div class="wrap">
-    <p class="eyebrow">Unofficial civic guide</p>
-    <h1>Pasig City Punong Barangay<br>Candidate &amp; Legal Guide</h1>
+    <p class="eyebrow" data-i18n="eyebrow">Unofficial civic guide</p>
+    <h1 data-i18n="h1">Pasig City Punong Barangay Candidate &amp; Governance Guide</h1>
     <div class="alert alert-warn" role="note">
-      <strong>The November 2, 2026 election did not take place.</strong>
-      Republic Act No. 12326, signed September 24, 2026, moved the Barangay and SK Elections to <strong>November 2028</strong> and set a five-year term. The Supreme Court upheld the law on November 6, 2026; a motion for partial reconsideration was filed on November 10. Reports differ on the exact 2028 date (the second Monday, November 13, 2028, is most often cited), so wait for the COMELEC calendar.
+      <strong data-i18n="scTitle">Court status advisory:</strong>
+      <span data-i18n="scBody">Republic Act No. 12326 (signed September 24, 2026) moved the Barangay and SK Elections to the second Monday of November 2028 and set a five-year term. The Supreme Court upheld RA 12326 on November 6, 2026, but a motion for partial reconsideration was filed on November 10, 2026. Verify the final COMELEC implementing resolutions before you act.</span>
     </div>
-    <p class="lead">Check your eligibility, track your filing and campaign-compliance steps, and look up all 30 barangays of Pasig. Everything works offline once installed.</p>
+    <p class="lead" data-i18n="lead">Count down to election day, check your eligibility and term limits, plan your campaign budget, track your filing, and look up all 30 barangays of Pasig. Works offline once installed.</p>
     <div class="cta-row">
-      <a class="btn" href="#eligibility">Check my eligibility</a>
-      <a class="btn btn-outline" href="#checklist">Open checklist</a>
+      <a class="btn" href="#eligibility" data-i18n="ctaElig">Check my eligibility</a>
+      <a class="btn btn-outline" href="#budget" data-i18n="ctaBudget">Plan my budget</a>
     </div>
     <dl class="stats">
-      <div><dt>Barangays</dt><dd>30</dd></div>
-      <div><dt>Legislative district</dt><dd>1 (lone)</dd></div>
-      <div><dt>Term (RA 12326)</dt><dd>5 years</dd></div>
-      <div><dt>Next BSKE</dt><dd>Nov 2028</dd></div>
+      <div><dt data-i18n="stBrgy">Barangays</dt><dd>30</dd></div>
+      <div><dt data-i18n="stDist">Councilor districts</dt><dd>22 + 8</dd></div>
+      <div><dt data-i18n="stTerm">Term (RA 12326)</dt><dd data-i18n="stTermV">5 years</dd></div>
+      <div><dt data-i18n="stElec">Election day</dt><dd>Nov 13, 2028</dd></div>
     </dl>
   </div>
 </section>
 
-<section id="law" class="section" aria-labelledby="law-h">
+<section id="countdown" class="section" aria-labelledby="cd-h">
   <div class="wrap">
-    <h2 id="law-h">Legal &amp; election framework</h2>
-    <p class="muted">Summaries only, not legal advice. Always check the text of the law and current COMELEC resolutions.</p>
+    <h2 id="cd-h" data-i18n="cdH">Countdown to November 13, 2028</h2>
+    <div class="card cd-card" aria-live="off">
+      <div class="cd-grid" id="cd-grid" role="timer" aria-label="Time remaining until November 13, 2028">
+        <div class="cd-box"><span id="cd-d">0</span><small data-i18n="days">days</small></div>
+        <div class="cd-box"><span id="cd-h2">0</span><small data-i18n="hours">hours</small></div>
+        <div class="cd-box"><span id="cd-m">0</span><small data-i18n="mins">minutes</small></div>
+        <div class="cd-box"><span id="cd-s">0</span><small data-i18n="secs">seconds</small></div>
+      </div>
+      <p class="small muted" id="cd-note">Counting to 12:00 AM, November 13, 2028 (Philippine time).</p>
+    </div>
+    <h3 data-i18n="msH">Key milestones</h3>
+    <ol class="timeline" id="ms-list"></ol>
+    <p class="small muted">Dates marked "TBA" are set by COMELEC calendar resolutions that have not been published here. This guide does not guess at them.</p>
+  </div>
+</section>
 
+<section id="law" class="section alt" aria-labelledby="law-h">
+  <div class="wrap">
+    <h2 id="law-h" data-i18n="lawH">Legal &amp; election framework</h2>
+    <p class="muted">Summaries only, not legal advice. Check the text of the law and current COMELEC resolutions.</p>
     <h3>How the schedule changed</h3>
     <ol class="timeline">
-      <li><strong>Before 2025:</strong> The BSKE had been set for December 2025.</li>
-      <li><strong>August 2025 &mdash; RA 12232:</strong> Postponed the December 2025 BSKE to the first Monday of November 2026 (November 2, 2026), set a four-year term, a three-consecutive-term limit for barangay officials and a one-term limit for SK officials. Incumbents serve in a holdover capacity until successors are elected and qualified, and officials on their third consecutive term could not run for the same post in 2026.</li>
-      <li><strong>September 24, 2026 &mdash; RA 12326:</strong> Fixed the term of barangay and SK officials at five years, cancelled the November 2, 2026 elections and rescheduled them to November 2028. Incumbents continue in a holdover capacity until their successors are elected and qualified.</li>
-      <li><strong>November 6, 2026:</strong> The Supreme Court upheld the constitutionality of RA 12326. A motion for partial reconsideration was filed on November 10, 2026.</li>
+      <li><strong>August 2025 &mdash; RA 12232:</strong> Postponed the December 2025 BSKE to the first Monday of November 2026 and set a four-year term.</li>
+      <li><strong>September 24, 2026 &mdash; RA 12326:</strong> Cancelled the November 2, 2026 elections, fixed the term at five years and set the next elections for the second Monday of November 2028, and every five years after.</li>
+      <li><strong>November 6, 2026:</strong> The Supreme Court upheld RA 12326. A motion for partial reconsideration was filed on November 10, 2026.</li>
     </ol>
-    <div class="alert alert-info" role="note"><strong>Open questions to verify with COMELEC:</strong> the exact 2028 election date, the filing period for Certificates of Candidacy, and how term limits are counted under RA 12326. This guide does not guess at them.</div>
-
     <div class="grid two">
+      <article class="card">
+        <h3>RA 12326 key provisions</h3>
+        <ul>
+          <li><strong>Sec. 1 &mdash; Term and limits:</strong> Five-year term. Barangay officials may serve no more than <strong>two (2) consecutive terms</strong> in the same position (SK officials: one term). Voluntary renunciation does not interrupt a full term.</li>
+          <li><strong>Election date:</strong> Second Monday of November 2028 (November 13, 2028).</li>
+          <li><strong>Sec. 4-B &mdash; Training:</strong> DILG, with TESDA, COMELEC and state universities and colleges (SUCs), to institutionalize continuing training and capacity-building for barangay officials and SK members.</li>
+          <li><strong>Sec. 5 &mdash; Transitory rule:</strong> Because terms were extended by two years, incumbents are treated as having completed one term. Those serving their last permitted term in the same position cannot run for that position in November 2028.</li>
+          <li><strong>Sec. 6:</strong> Incumbents are not exempt from pending or future administrative, civil or criminal cases.</li>
+        </ul>
+      </article>
       <article class="card">
         <h3>RA 7160, Sec. 39 &mdash; Qualifications</h3>
         <ul class="ticks">
           <li>Citizen of the Philippines.</li>
-          <li>Registered voter in the barangay where you intend to be elected.</li>
-          <li>Resident of that barangay for at least one (1) year immediately preceding the day of the election.</li>
+          <li>Registered voter in the barangay where you will run.</li>
+          <li>Resident of that barangay for at least one (1) year immediately before election day (cutoff: <strong>November 13, 2027</strong>).</li>
           <li>Able to read and write Filipino or any other local language or dialect.</li>
-          <li>At least eighteen (18) years old on election day.</li>
+          <li>At least 18 years old on election day.</li>
         </ul>
       </article>
       <article class="card">
         <h3>RA 7160, Sec. 40 &mdash; Disqualifications</h3>
         <ul class="cross">
-          <li>Sentenced by final judgment for an offense involving moral turpitude, or punishable by one year or more of imprisonment, within two years after serving sentence.</li>
-          <li>Removed from office as a result of an administrative case.</li>
-          <li>Convicted by final judgment for violating the oath of allegiance to the Republic.</li>
+          <li>Final sentence for a moral-turpitude offense, or one punishable by 1+ year imprisonment, within two years after serving.</li>
+          <li>Removed from office through an administrative case.</li>
+          <li>Final conviction for violating the oath of allegiance.</li>
           <li>Dual citizenship.</li>
-          <li>Fugitive from justice in criminal or non-political cases.</li>
-          <li>Permanent resident of, or immigrant to, a foreign country (unless the right of abode is waived as the law requires).</li>
+          <li>Fugitive from justice.</li>
+          <li>Permanent resident or immigrant abroad, without the required waiver.</li>
           <li>Insane or feeble-minded.</li>
         </ul>
-        <p class="small muted">The Omnibus Election Code (Secs. 12 and 68) adds further grounds, such as certain election offenses. Barangay elections are non-partisan.</p>
+        <p class="small muted">The Omnibus Election Code adds other grounds. Barangay elections are non-partisan.</p>
       </article>
     </div>
   </div>
 </section>
 
-<section id="eligibility" class="section alt" aria-labelledby="el-h">
+<section id="eligibility" class="section" aria-labelledby="el-h">
   <div class="wrap">
-    <h2 id="el-h">Candidate eligibility checker</h2>
+    <h2 id="el-h" data-i18n="elH">Eligibility &amp; term-limit checker</h2>
     <p class="muted">Answer each question. Nothing leaves your device.</p>
     <form id="el-form" class="card form" novalidate>
       <div class="field">
         <label for="el-barangay">Barangay you intend to run in</label>
         <select id="el-barangay" required><option value="">Select a barangay</option></select>
-      </div>
-      <div class="field">
-        <label for="el-election">Assumed election day <span class="small muted">(provisional, change once COMELEC confirms)</span></label>
-        <input type="date" id="el-election" value="2028-11-13" required>
       </div>
       <div class="field">
         <label for="el-dob">Your date of birth</label>
@@ -168,32 +198,101 @@
       </div>
       <fieldset class="field">
         <legend>Citizenship and registration</legend>
-        <label class="check"><input type="checkbox" id="el-citizen"> I am a Filipino citizen</label>
-        <label class="check"><input type="checkbox" id="el-voter"> I am (or will be) a registered voter in that barangay</label>
-        <label class="check"><input type="checkbox" id="el-literate"> I can read and write Filipino or another local language/dialect</label>
+        <label class="check"><input type="checkbox" id="el-citizen"> <span>I am a Filipino citizen</span></label>
+        <label class="check"><input type="checkbox" id="el-voter"> <span>I am (or will be) a registered voter in that barangay</span></label>
+        <label class="check"><input type="checkbox" id="el-literate"> <span>I can read and write Filipino or another local language/dialect</span></label>
+      </fieldset>
+      <fieldset class="field">
+        <legend>Incumbent / Kagawad term-limit toggle</legend>
+        <label class="check"><input type="checkbox" id="el-incumbent"> <span>I am a current barangay official (Punong Barangay or Kagawad)</span></label>
+        <div id="el-inc-box" hidden>
+          <label for="el-terms">Full consecutive terms you completed in the position you want to run for <span class="small muted">(before your current extended term)</span></label>
+          <select id="el-terms">
+            <option value="0">0 &mdash; I was elected for the first time in 2023</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3 or more</option>
+          </select>
+          <p class="small muted">Under RA 12326 Sec. 5, your current extended term counts as a completed term, and the limit is two consecutive terms in the same position. Terms in a different position (for example Kagawad then Punong Barangay) are counted separately.</p>
+        </div>
       </fieldset>
       <fieldset class="field">
         <legend>Disqualification check (tick any that apply)</legend>
-        <label class="check"><input type="checkbox" class="el-dq" value="Final conviction for a crime involving moral turpitude, or punishable by 1+ year imprisonment, within 2 years after serving sentence"> Final conviction for a moral-turpitude offense or a crime punishable by 1+ year, within 2 years after serving</label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Removed from office through an administrative case"> Removed from office through an administrative case</label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Final conviction for violating the oath of allegiance"> Final conviction for violating the oath of allegiance</label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Dual citizenship"> Dual citizenship</label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Fugitive from justice"> Fugitive from justice</label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Permanent resident or immigrant to a foreign country without a waiver of residence rights"> Permanent resident/immigrant abroad without a waiver</label>
-        <label class="check"><input type="checkbox" class="el-dq" value="Declared insane or feeble-minded"> Declared insane or feeble-minded</label>
+        <label class="check"><input type="checkbox" class="el-dq" value="Final conviction for a moral-turpitude offense or a crime punishable by 1+ year, within 2 years after serving"> <span>Final conviction for a moral-turpitude offense or a crime punishable by 1+ year, within 2 years after serving</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" value="Removed from office through an administrative case"> <span>Removed from office through an administrative case</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" value="Final conviction for violating the oath of allegiance"> <span>Final conviction for violating the oath of allegiance</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" value="Dual citizenship"> <span>Dual citizenship</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" value="Fugitive from justice"> <span>Fugitive from justice</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" value="Permanent resident or immigrant abroad without a waiver"> <span>Permanent resident/immigrant abroad without a waiver</span></label>
+        <label class="check"><input type="checkbox" class="el-dq" value="Declared insane or feeble-minded"> <span>Declared insane or feeble-minded</span></label>
       </fieldset>
       <div class="btn-row">
-        <button type="submit" class="btn">Assess eligibility</button>
-        <button type="reset" class="btn btn-outline" id="el-reset">Reset</button>
+        <button type="submit" class="btn" data-i18n="assess">Assess eligibility</button>
+        <button type="reset" class="btn btn-outline" id="el-reset" data-i18n="reset">Reset</button>
       </div>
     </form>
     <div id="el-result" class="result" role="status" aria-live="polite" tabindex="-1" hidden></div>
   </div>
 </section>
 
+<section id="budget" class="section alt" aria-labelledby="bg-h">
+  <div class="wrap">
+    <h2 id="bg-h" data-i18n="bgH">Campaign budget &amp; SOCE calculator</h2>
+    <p class="muted">RA 7166 sets a spending limit of <strong>&#8369;5.00 per registered voter</strong> for a candidate not nominated by a party. Confirm the current figure in the COMELEC resolution for the 2028 BSKE.</p>
+    <div class="card form">
+      <div class="field">
+        <label for="calc-brgy">Barangay</label>
+        <select id="calc-brgy"><option value="">Custom</option></select>
+      </div>
+      <div class="field">
+        <label for="calc-voters">Registered voters in the barangay</label>
+        <input type="number" id="calc-voters" min="0" step="1" inputmode="numeric" placeholder="e.g. 12000">
+        <p class="small muted">Get the current count from the COMELEC Pasig City Election Office. Presets below are illustrative sizes only, not actual voter counts.</p>
+      </div>
+      <div class="chip-row" role="group" aria-label="Voter count presets">
+        <button type="button" class="chip" data-voters="3000">Small ~3,000</button>
+        <button type="button" class="chip" data-voters="10000">Medium ~10,000</button>
+        <button type="button" class="chip" data-voters="25000">Large ~25,000</button>
+        <button type="button" class="chip" data-voters="50000">Mega ~50,000 (e.g. Pinagbuhatan, Manggahan scale)</button>
+      </div>
+      <div class="budget-sum" aria-live="polite">
+        <div><small>Spending limit</small><strong id="b-limit">&#8369;0.00</strong></div>
+        <div><small>Expenses so far</small><strong id="b-spent">&#8369;0.00</strong></div>
+        <div><small>Remaining</small><strong id="b-left">&#8369;0.00</strong></div>
+        <div><small>Contributions</small><strong id="b-contrib">&#8369;0.00</strong></div>
+      </div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Share of spending limit used" id="b-bar"><span id="b-fill"></span></div>
+      <p class="small" id="b-msg" role="status"></p>
+    </div>
+
+    <h3>Itemized ledger (SOCE)</h3>
+    <form id="tx-form" class="card form" novalidate>
+      <div class="field"><label for="tx-type">Type</label>
+        <select id="tx-type"><option value="expense">Expense</option><option value="contribution">Contribution received</option></select></div>
+      <div class="field"><label for="tx-date">Date</label><input type="date" id="tx-date" required></div>
+      <div class="field"><label for="tx-desc">Description / payee or donor</label><input type="text" id="tx-desc" maxlength="120" required placeholder="e.g. Tarpaulin printing, Juan Dela Cruz"></div>
+      <div class="field"><label for="tx-amt">Amount (&#8369;)</label><input type="number" id="tx-amt" min="0.01" step="0.01" inputmode="decimal" required></div>
+      <div class="btn-row"><button type="submit" class="btn">Add entry</button></div>
+      <p id="tx-err" class="small err" role="alert" hidden></p>
+    </form>
+    <div class="table-wrap"><table class="tx-table" id="tx-table">
+      <caption class="sr-only">Itemized contributions and expenses</caption>
+      <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Description</th><th scope="col" class="num">Amount</th><th scope="col" class="no-print"><span class="sr-only">Remove</span></th></tr></thead>
+      <tbody id="tx-body"></tbody>
+    </table></div>
+    <p id="tx-empty" class="muted">No entries yet.</p>
+    <div class="btn-row no-print">
+      <button type="button" class="btn btn-outline" id="tx-csv">Export CSV</button>
+      <button type="button" class="btn btn-outline" id="tx-print">Print SOCE summary</button>
+      <button type="button" class="btn btn-ghost" id="tx-clear">Clear ledger</button>
+    </div>
+    <p class="small muted">File your Statement of Contributions and Expenditures (SOCE) within <strong>30 days after election day</strong>. This ledger is a personal worksheet, not the official COMELEC form.</p>
+  </div>
+</section>
+
 <section id="checklist" class="section" aria-labelledby="ck-h">
   <div class="wrap">
-    <h2 id="ck-h">COC filing &amp; campaign compliance checklist</h2>
+    <h2 id="ck-h" data-i18n="ckH">COC filing &amp; post-election checklist</h2>
     <p class="muted">Your progress is saved on this device.</p>
     <div class="progress-wrap">
       <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Checklist progress" id="ck-bar"><span id="ck-fill"></span></div>
@@ -201,33 +300,26 @@
     </div>
     <div id="ck-list"></div>
     <div class="btn-row no-print">
-      <button type="button" class="btn btn-outline" id="ck-json">Export JSON</button>
+      <button type="button" class="btn btn-outline" id="ck-json">Export JSON backup</button>
       <button type="button" class="btn btn-outline" id="ck-print">Print</button>
       <button type="button" class="btn btn-ghost" id="ck-reset">Reset all</button>
-    </div>
-
-    <div class="card calc" id="calc">
-      <h3>Campaign spending limit calculator</h3>
-      <p class="small muted">Under RA 7166, the limit for a candidate not nominated by a party is <strong>&#8369;5.00 per registered voter</strong> in the barangay. Confirm the figure in the current COMELEC resolution before relying on it.</p>
-      <div class="field">
-        <label for="calc-brgy">Barangay</label>
-        <select id="calc-brgy"><option value="">Custom (enter voters below)</option></select>
-      </div>
-      <div class="field">
-        <label for="calc-voters">Registered voters in the barangay</label>
-        <input type="number" id="calc-voters" min="0" step="1" inputmode="numeric" placeholder="e.g. 12000">
-        <p class="small muted">Get the current number from the COMELEC Pasig City Election Office. This app does not store voter counts.</p>
-      </div>
-      <p class="calc-out" aria-live="polite">Estimated limit: <strong id="calc-out">&#8369;0.00</strong></p>
     </div>
   </div>
 </section>
 
 <section id="directory" class="section alt" aria-labelledby="dir-h">
   <div class="wrap">
-    <h2 id="dir-h">Pasig City barangay directory</h2>
-    <p class="muted">Pasig is a highly urbanized city of <strong>30 barangays</strong> with a single (lone) congressional district, so there is no District 1 / District 2 split for filing.</p>
-    <div class="alert alert-info" role="note"><strong>COMELEC office:</strong> File and ask questions at the Office of the Election Officer, Pasig City (COMELEC). Confirm the address, office hours and filing schedule on <a href="https://comelec.gov.ph" rel="noopener" target="_blank">comelec.gov.ph</a> or with the office directly, because filing periods are set per election.</div>
+    <h2 id="dir-h" data-i18n="dirH">Pasig City barangay directory</h2>
+    <p class="muted">Pasig has <strong>one congressional district</strong>. For the Sangguniang Panlungsod, it is divided into <strong>District 1 (22 barangays)</strong> and <strong>District 2 (8 barangays)</strong>.</p>
+    <div class="grid two">
+      <article class="card"><h3>COMELEC Pasig City</h3>
+        <p>Pasig City Hall, Brgy. San Nicolas. A public procedure listing shows the 1st District office on the 5th floor and the 2nd District office on the 3rd floor, tel. 641-1924.</p>
+        <p class="small muted">Confirm the office location, hours and filing schedule with COMELEC before you go.</p></article>
+      <article class="card"><h3>DILG &amp; Liga ng mga Barangay</h3>
+        <p><strong>DILG Pasig City Field Office:</strong> supervises barangay governance and training (RA 12326 Sec. 4-B).</p>
+        <p><strong>Liga ng mga Barangay &ndash; Pasig Chapter:</strong> based at Pasig City Hall, Brgy. San Nicolas.</p>
+        <p class="small muted">Call ahead to confirm current offices and contact numbers.</p></article>
+    </div>
     <div class="toolbar">
       <div class="field grow">
         <label for="dir-search">Search barangays</label>
@@ -236,62 +328,53 @@
       <div class="field">
         <label for="dir-filter">Show</label>
         <select id="dir-filter">
-          <option value="all">All 30</option>
-          <option value="large">Largest 5 by 2024 population</option>
+          <option value="all">All (30)</option>
+          <option value="1">District 1 (22)</option>
+          <option value="2">District 2 (8)</option>
           <option value="saved">Saved by me</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="dir-sort">Sort</label>
-        <select id="dir-sort">
-          <option value="az">A to Z</option>
-          <option value="za">Z to A</option>
         </select>
       </div>
     </div>
     <p id="dir-count" class="small" role="status" aria-live="polite"></p>
     <ul id="dir-list" class="dir-grid"></ul>
-    <p class="small muted">Population figures are from the 2024 Census of Population (POPCEN) as published in public barangay directories, shown only for the five largest barangays. Voter counts change and are not included.</p>
+    <p class="small muted">Population: 2024 Census of Population (POPCEN), as published in public barangay directories, shown only for the five largest barangays.</p>
   </div>
 </section>
 
-<section id="duties" class="section" aria-labelledby="du-h">
+<section id="playbook" class="section" aria-labelledby="pb-h">
   <div class="wrap">
-    <h2 id="du-h">Powers, duties &amp; compensation of a Punong Barangay</h2>
-    <p class="muted">Based on RA 7160 (Local Government Code), Sec. 389 and related provisions.</p>
+    <h2 id="pb-h" data-i18n="pbH">First 100 days &amp; Katarungang Pambarangay playbook</h2>
+    <p class="muted">Based on RA 7160 Sec. 389 and related provisions. Verify the current details with DILG.</p>
+    <ol class="steps">
+      <li><strong>Days 1&ndash;15: Set up your team.</strong> Appoint the Barangay Secretary and Treasurer (with the concurrence required by law), and organize your barangay tanods. Constitute the <em>Lupong Tagapamayapa</em> within 15 days from the start of your term.</li>
+      <li><strong>Days 1&ndash;30: Take stock.</strong> Review the barangay's budget, cash position, pending contracts, programs and records. Meet the Sangguniang Barangay and the SK chairperson.</li>
+      <li><strong>Days 30&ndash;60: Convene and plan.</strong> Organize the Barangay Development Council, which you chair, and begin the Barangay Development Plan. Activate the peace and order, anti-drug (BADAC) and disaster (BDRRMC) committees.</li>
+      <li><strong>Days 60&ndash;100: Show results.</strong> Hold a Barangay Assembly, publish your plan and budget priorities, and attend the training programs that DILG, TESDA, COMELEC and SUCs run under RA 12326 Sec. 4-B.</li>
+    </ol>
     <div class="grid two">
       <article class="card"><h3>Executive powers (Sec. 389)</h3>
         <ul>
-          <li>Enforce all laws and ordinances applicable within the barangay.</li>
-          <li>Negotiate, enter into and sign contracts for the barangay, with the authorization of the Sangguniang Barangay.</li>
-          <li>Maintain public order, and call on the police or other government units when needed.</li>
-          <li>Organize and lead an emergency group to respond to calamities, crime and disorder.</li>
-          <li>Preside over Sangguniang Barangay sessions (with a vote only to break a tie) and over barangay assemblies.</li>
-          <li>Prepare and submit the annual executive budget proposal to the Sangguniang Barangay.</li>
-          <li>Appoint or replace the barangay treasurer and secretary, subject to the law.</li>
-          <li>Ensure delivery of basic services and promote the general welfare, including cleanliness, health and anti-drug efforts.</li>
+          <li>Enforce laws and ordinances within the barangay.</li>
+          <li>Sign contracts for the barangay, with the authorization of the Sangguniang Barangay.</li>
+          <li>Maintain public order and call on the police when needed.</li>
+          <li>Preside over Sangguniang Barangay sessions and barangay assemblies.</li>
+          <li>Prepare the annual executive budget proposal.</li>
+          <li>Organize an emergency response group for calamities and disorder.</li>
         </ul>
       </article>
-      <article class="card"><h3>Katarungang Pambarangay</h3>
-        <p>The Punong Barangay chairs the <strong>Lupong Tagapamayapa</strong> and mediates disputes between residents. Most disputes within the same city must go through barangay conciliation before they can be filed in court.</p>
-        <ul>
-          <li>Mediation by the Punong Barangay: 15 days.</li>
-          <li>Pangkat ng Tagapagkasundo, if mediation fails: a further 15 days (extendable by up to 15 more).</li>
-          <li>A settlement has the force of a final court judgment after 10 days, unless repudiated.</li>
-          <li>Certain disputes are exempt, for example those involving parties in different cities, or offenses punishable by more than one year of imprisonment or a fine above &#8369;5,000.</li>
-        </ul>
+      <article class="card"><h3>Barangay Assembly</h3>
+        <p>The Barangay Assembly, made up of residents who are registered voters, meets <strong>at least twice a year</strong>. You call it to order and report on the barangay's finances and programs.</p>
       </article>
-      <article class="card"><h3>Development &amp; peace and order</h3>
-        <ul>
-          <li>Chairs the Barangay Development Council (BDC), which prepares the Barangay Development Plan.</li>
-          <li>Leads the Barangay Peace and Order Committee and the Barangay Anti-Drug Abuse Council (BADAC).</li>
-          <li>Heads the Barangay Disaster Risk Reduction and Management Committee (BDRRMC).</li>
-          <li>Oversees the barangay's share of internal revenue allotment (IRA) and local funds, subject to COA rules.</li>
-        </ul>
+      <article class="card"><h3>Katarungang Pambarangay timeline</h3>
+        <ol>
+          <li><strong>15 days:</strong> mediation by the Punong Barangay.</li>
+          <li><strong>15 days:</strong> conciliation by the <em>Pangkat ng Tagapagkasundo</em> if mediation fails (extendable by up to 15 more days).</li>
+          <li><strong>10 days:</strong> a settlement becomes final and executory unless repudiated.</li>
+        </ol>
+        <p class="small muted">Some disputes are exempt, for example those between residents of different cities, or offenses punishable by more than one year of imprisonment or a fine above &#8369;5,000.</p>
       </article>
       <article class="card"><h3>Honoraria &amp; benefits</h3>
-        <p>Barangay officials are not paid a fixed salary. They receive <strong>honoraria</strong> set by the Sangguniang Panlungsod within the limits of the law, plus statutory benefits such as allowances and insurance coverage.</p>
-        <p class="small muted">The amount varies by city and by the barangay's resources. Ask the City Treasurer or the DILG field office in Pasig for the current rates, because they are changed by ordinance and national circulars.</p>
+        <p>Barangay officials receive <strong>honoraria</strong> fixed by the Sangguniang Panlungsod within the law, plus statutory benefits. Ask the City Treasurer or DILG for the current rates, since they change by ordinance and circular.</p>
       </article>
     </div>
   </div>
@@ -301,24 +384,26 @@
   <div class="wrap">
     <h2 id="src-h">Sources &amp; disclaimer</h2>
     <ul class="small">
-      <li>Presidential Communications Office and PNA reports on RA 12232 (August 2025).</li>
-      <li>Philstar and NAMFREL reports on RA 12326 (September 2026).</li>
-      <li>Tribune reports on the Supreme Court ruling (November 2026).</li>
-      <li>Republic Act No. 7160 (Local Government Code of 1991); Republic Act No. 7166; Omnibus Election Code.</li>
+      <li>Text of Republic Act No. 12326 as reproduced on LawPlayer (the official text prevails).</li>
+      <li>Philstar, Tribune and NAMFREL reports on RA 12326 and the Supreme Court ruling.</li>
+      <li>Wikipedia (Pasig) for the councilor-district grouping; PNA and PCO reports on RA 12232.</li>
+      <li>RA 7160 (Local Government Code), RA 7166 and the Omnibus Election Code.</li>
     </ul>
-    <p class="small muted">This is an independent, unofficial reference and not legal advice or a COMELEC publication. Laws, rules and dates change; verify everything with COMELEC, the DILG or a lawyer before you act.</p>
+    <p class="small muted">Independent, unofficial reference. It is not legal advice or a COMELEC publication. Laws, rules and dates change; verify with COMELEC, DILG or a lawyer before you act.</p>
   </div>
 </section>
 </main>
 
-<footer class="site-footer"><div class="wrap"><p class="small">&copy; 2026 Kapitan Guide &middot; Unofficial civic information for Pasig City voters and candidates.</p></div></footer>
+<footer class="site-footer"><div class="wrap"><p class="small">&copy; 2026 Kapitan Guide &middot; Unofficial civic information for Pasig City voters and candidates.</p>
+<button type="button" class="btn btn-sm btn-outline no-print" id="share-guide">Share this guide</button></div></footer>
 
 <nav class="bottom-nav" aria-label="Mobile">
   <a href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg><span>Home</span></a>
-  <a href="#law"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 3 6v2h18V6zM5 10v8H3v2h18v-2h-2v-8h-2v8h-3v-8h-2v8h-2v-8H9v8H7v-8z"/></svg><span>Legal</span></a>
-  <a href="#eligibility"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>Eligible?</span></a>
-  <a href="#checklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h2v2H4zm4 0h12v2H8zM4 11h2v2H4zm4 0h12v2H8zM4 17h2v2H4zm4 0h12v2H8z"/></svg><span>Checklist</span></a>
-  <a href="#directory"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>Barangays</span></a>
+  <a href="#eligibility"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span>Eligible</span></a>
+  <a href="#budget"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v12H3zm9 2.500a3.500 3.500 0 1 0 0 7 3.500 3.500 0 0 0 0-7z"/></svg><span>Budget</span></a>
+  <a href="#checklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h2v2H4zm4 0h12v2H8zM4 11h2v2H4zm4 0h12v2H8zM4 17h2v2H4zm4 0h12v2H8z"/></svg><span>Tasks</span></a>
+  <a href="#directory"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z"/></svg><span>Brgys</span></a>
+  <a href="#playbook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 3h14v18l-7-4-7 4z"/></svg><span>Plan</span></a>
 </nav>
 
 <div id="ios-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="ios-h" hidden>
@@ -333,6 +418,6 @@
   </div>
 </div>
 
-<script src="js/app.js"></script>
+<script src="./js/app.js"></script>
 </body>
 </html>
